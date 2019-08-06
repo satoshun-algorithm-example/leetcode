@@ -16,21 +16,29 @@ class Solution:
             return True
 
         # finish only one
-        if sl == si:
+        if sl <= si:
             return pl - 1 == pi and p[pl - 1] == '*'
-        if pl == pi:
+        if pl <= pi:
             return False
 
         if p[pi] == '.':
-            return self._isMatch(s, p, si + 1, pi + 1)
+            a = self._isMatch(s, p, si + 1, pi + 1)
+            b = False
+            if pl > pi + 1 and p[pi + 1] == '*':
+                b = self._isMatch(s, p, si, pi + 2)
+            return a or b
 
         if p[pi] == '*':
             if p[pi - 1] == '.' or s[si] == p[pi - 1]:
                 return self._isMatch(s, p, si + 1, pi) or self._isMatch(s, p, si, pi + 1)
             return self._isMatch(s, p, si, pi + 1)
 
-        if s[si] != p[pi]:
+        if s[si] != p[pi] and (pl > pi + 1 and p[pi + 1] != '*'):
             return False
 
-        return self._isMatch(s, p, si + 1, pi + 1)
+        a = self._isMatch(s, p, si + 1, pi + 1)
+        b = False
+        if pl > pi + 1 and p[pi + 1] == '*':
+            b = self._isMatch(s, p, si, pi + 2)
+        return a or b
 
