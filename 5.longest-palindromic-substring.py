@@ -6,12 +6,16 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         result = ""
+        max_length = 0
         l = len(s)
-        for start, c in enumerate(s):
-            for end in range(start, l):
+        for start in range(l):
+            for end in range(l - 1, start - 1, -1):
+                if end - start + 1 <= max_length:
+                    break
                 if self.is_palindrome(s, start, end):
-                    if len(result) <= end - start:
-                        result = s[start:end+1]
+                    if max_length <= end - start:
+                        result = s[start:end + 1]
+                        max_length = len(result)
 
         return result
 
