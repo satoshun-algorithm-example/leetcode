@@ -14,6 +14,12 @@ class Solution:
             left = 0
             right = l - 1
 
+            if nums[i - 1] == nums[i]:
+                left = i - 1
+
+            if i >= 2 and nums[i - 2] == nums[i - 1] == nums[i]:
+                continue
+
             while True:
                 if i <= left:
                     break
@@ -34,9 +40,7 @@ class Solution:
                         right -= 1
                     continue
 
-                e = [nums[left], nums[i], nums[right]]
-                if e not in result:
-                    result += [e]
+                result += [[nums[left], nums[i], nums[right]]]
 
                 left += 1
                 while i > left and nums[left - 1] == nums[left]:
