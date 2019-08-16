@@ -11,22 +11,17 @@
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        head, current = None, None
+        head = current = ListNode(0)
 
-        while True:
-            if l1 is None and l2 is None:
-                return head
-
-            if l1 is None or (l2 is not None and l1.val >= l2.val):
-                if current is not None:
-                    current.next = l2
+        while l1 and l2:
+            if l1.val >= l2.val:
+                current.next = l2
                 current = l2
                 l2 = l2.next
             else:
-                if current is not None:
-                    current.next = l1
+                current.next = l1
                 current = l1
                 l1 = l1.next
 
-            if head is None:
-                head = current
+        current.next = l1 or l2
+        return head.next
