@@ -6,12 +6,14 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         m = 0
-        l = len(height)
+        size = len(height)
+        left = 0
+        right = size - 1
 
-        for x in range(l):
-            for y in range(x + 1, l):
-                mm = (y - x) * min(height[x], height[y])
-                if mm > m:
-                    m = mm
+        for d in range(size - 1, 0, -1):
+            if height[left] < height[right]:
+                m, left = max(m, height[left] * d), left + 1
+            else:
+                m, right = max(m, height[right] * d), right - 1
 
         return m
