@@ -6,22 +6,9 @@
 class Solution:
     def reverse(self, x: int) -> int:
         if x < 0:
-            is_minus = True
-            x = abs(x)
+            is_minus = -1
         else:
-            is_minus = False
+            is_minus = 1
 
-        r, size = 0, len(str(x))
-
-        for i in range(size):
-            d = x % 10
-            r += d * 10 ** (size - i - 1)
-            x //= 10
-
-        if is_minus:
-            r = -r
-
-        if abs(r) > ((1 << 31) - 1):
-            return 0
-
-        return r
+        x = int(str(x * is_minus)[::-1])
+        return is_minus * x * (x < 2 ** 31)
