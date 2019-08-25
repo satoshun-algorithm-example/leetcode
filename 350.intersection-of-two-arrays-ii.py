@@ -4,15 +4,9 @@
 # [350] Intersection of Two Arrays II
 #
 from typing import List
+from collections import Counter
 
 
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        n1, n2 = (nums1, nums2) if len(nums1) > len(nums2) else (nums2, nums1)
-
-        n1 = "".join([str(n) for n in n1])
-        n2 = "".join([str(n) for n in n2])
-
-        count = n1.count(n2)
-
-        return [int(n) for n in n2] * count
+        return list((Counter(nums1) & Counter(nums2)).elements())
