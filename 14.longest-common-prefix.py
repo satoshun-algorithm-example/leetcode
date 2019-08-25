@@ -8,15 +8,10 @@ class Solution:
         if not strs:
             return ""
 
-        i = 0
-        try:
-            while True:
-                c = strs[0][i]
-                for s in strs:
-                    if s[i] != c:
-                        gaga
-                i += 1
-        except:
-            pass
+        short = min(strs, key=len)
+        for i in range(len(short)):
+            for s in strs:
+                if s[i] != short[i]:
+                    return short[:i]
 
-        return strs[0][0:i]
+        return short
