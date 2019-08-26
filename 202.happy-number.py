@@ -6,7 +6,7 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
         while True:
-            total = sum([int(i) * int(i) for i in str(n)])
+            total = sum([int(i) ** 2 for i in str(n)])
             if 0 <= total <= 9:
                 return total == 1 or total == 7
             n = total
