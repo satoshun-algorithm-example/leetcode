@@ -11,8 +11,10 @@ class Solution:
         if not nums:
             return 0
 
-        i = 1
+        j = 1
         for i in range(len(nums) - 1):
             if nums[i] != nums[i + 1]:
-                i += 1
-        return i
+                nums[j] = nums[i+1]
+                j += 1
+
+        return j
