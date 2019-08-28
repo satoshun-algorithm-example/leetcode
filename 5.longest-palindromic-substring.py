@@ -5,30 +5,19 @@
 #
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if not s:
-            return ""
-
-        r = s[0]
-        ml = 1
-        for i in range(1, len(s) - 1):
-            cl = 0
-
-            while True:
-                left = i - cl
-                right = i + cl
-                if left < 0:
-                    break
-                if right >= len(s):
-                    break
-                if s[left] != s[right]:
-                    break
-                cl += 1
-
-            cl -= 1
-            if ml < (cl + 1) * 2 - 1:
-                left = i - cl
-                right = i + cl
-                r = s[left:right + 1]
-                ml = len(r)
+        r = ""
+        for i in range(len(s)):
+            t = self.substring(i, i, s)
+            if len(r) < len(t):
+                r = t
+            t = self.substring(i, i + 1, s)
+            if len(r) < len(t):
+                r = t
 
         return r
+
+    def substring(self, l, r, s):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        return s[l + 1:r]
