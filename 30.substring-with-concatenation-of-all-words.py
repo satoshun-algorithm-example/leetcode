@@ -3,24 +3,17 @@
 #
 # [30] Substring with Concatenation of All Words
 #
+from typing import List
+import re
+
+
 class Solution:
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
-        dests = permutation(words)
+        if not words:
+            return []
 
-        indices = []
-        for dest in dests:
-            d = "".join(dest)
-            if not d:
-                continue
-
-            for i in range(len(s)):
-                if s[i:].startswith(d):
-                    indices += [i]
-
-        return sorted(set(indices))
-
-def permutation(words):
-    if not words:
-        return [[]]
-    return [[word] + t for i, word in enumerate(words)
-            for t in permutation(words[:i] + words[i+1:])]
+        word = words[0]
+        words = words[1:]
+        indices = [m.start() for m in re.finditer(word, word)]
+        for i in indices:
+            pass
