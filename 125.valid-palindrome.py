@@ -3,16 +3,9 @@
 #
 # [125] Valid Palindrome
 #
-import string
 
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        s = s.lower()
-        cases = string.ascii_lowercase + string.digits
-        r = ""
-        for c in s:
-            if c in cases:
-                r += c
-
+        r = ''.join(c for c in s if c.isalnum()).lower()
         return r == r[::-1]
