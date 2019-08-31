@@ -17,7 +17,7 @@ class Solution:
                 break
             start += 1
 
-        while start <= end: 
+        while start <= end:
             if nums[end] != sort_nums[end]:
                 break
             end -= 1

@@ -8,9 +8,9 @@ from typing import List
 
 class Solution:
     def countBits(self, num: int) -> List[int]:
-        a = []
+        a = [0]
 
-        for i in range(num + 1):
-            a.append(bin(i).count('1'))
+        while len(a) < num + 1:
+            a.extend(i + 1 for i in a[:])
 
-        return a
+        return a[:num + 1]
