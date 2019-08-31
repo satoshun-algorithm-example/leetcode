@@ -11,7 +11,13 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        i = k
-        for _ in range(len(nums) - 1):
-            nums[0], nums[i % len(nums)] = nums[i % len(nums)], nums[0]
-            i += k
+        k = k % len(nums)
+        self.reverse(nums, 0, len(nums) - 1)
+        self.reverse(nums, 0, k - 1)
+        self.reverse(nums, k, len(nums) - 1)
+
+    def reverse(self, nums, start, end):
+        while start <= end:
+            nums[start], nums[end] = nums[end], nums[start]
+            end -= 1
+            start += 1
