@@ -14,18 +14,4 @@ class Solution:
     def maxDepth(self, root: TreeNode) -> int:
         if not root:
             return 0
-
-        self.max_depth = 1
-
-        def count(node, cur_depth):
-            if node.left is None and node.right is None:
-                self.max_depth = max(self.max_depth, cur_depth)
-                return
-
-            if node.left:
-                count(node.left, cur_depth + 1)
-            if node.right:
-                count(node.right, cur_depth + 1)
-
-        count(root, 1)
-        return self.max_depth
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
