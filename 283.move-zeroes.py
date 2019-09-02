@@ -11,8 +11,8 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        for i in range(len(nums) - 2, -1, -1):
-            for j in range(i, len(nums) - 1):
-                if nums[j] != 0:
-                    break
-                nums[j], nums[j + 1] = nums[j + 1], nums[j]
+        position = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[i], nums[position] = nums[position], nums[i]
+                position += 1
