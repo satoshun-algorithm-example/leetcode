@@ -19,24 +19,6 @@ class Solution:
             return None
         center = len(nums) // 2
         root = TreeNode(nums[center])
-        self.recursive_left(nums[:center], root)
-        self.recursive_right(nums[center + 1:], root)
+        root.left = self.sortedArrayToBST(nums[:center])
+        root.right = self.sortedArrayToBST(nums[center + 1:])
         return root
-
-    def recursive_left(self, nums, parent):
-        if not nums:
-            return
-        center = len(nums) // 2
-        node = TreeNode(nums[center])
-        parent.left = node
-        self.recursive_left(nums[:center], node)
-        self.recursive_right(nums[center + 1:], node)
-
-    def recursive_right(self, nums, parent):
-        if not nums:
-            return
-        center = len(nums) // 2
-        node = TreeNode(nums[center])
-        parent.right = node
-        self.recursive_left(nums[:center], node)
-        self.recursive_right(nums[center + 1:], node)
