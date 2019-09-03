@@ -8,18 +8,11 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        if not prices or len(prices) == 1:
+            return 0
         profit = 0
-        s = None
-
-        for i, p in enumerate(prices):
-            if s is None:
-                if len(prices) == i + 1:
-                    break
-                if prices[i] < prices[i + 1]:
-                    s = prices[i]
-            else:
-                if s < prices[i] and (len(prices) == i + 1 or prices[i] > prices[i + 1]):
-                    profit += prices[i] - s
-                    s = None
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]
 
         return profit
