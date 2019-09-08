@@ -4,7 +4,6 @@
 # [454] 4Sum II
 #
 from typing import List
-from itertools import permutations
 
 
 class Solution:
