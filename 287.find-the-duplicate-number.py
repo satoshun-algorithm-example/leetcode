@@ -8,7 +8,19 @@ from typing import List
 
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        for i in range(len(nums)):
-            for j in range(len(nums) - 1):
-                if nums[i] == nums[(j + i + 1) % len(nums)]:
-                    return nums[i]
+        low = 0
+        high = len(nums) - 1
+        mid = (high + low) // 2
+        while high - low > 1:
+            count = 0
+            for num in nums:
+                if mid < num <= high:
+                    count += 1
+
+            if high - mid >= count:
+                high = mid
+            else:
+                low = mid
+
+            mid = (high + low) // 2
+        return high
