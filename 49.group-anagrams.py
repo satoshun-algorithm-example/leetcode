@@ -10,9 +10,9 @@ class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         d = {}
         for s in strs:
-            ss = ''.join(sorted(s))
-            if ss not in d:
-                d[ss] = []
-            d[ss].append(s)
+            key = tuple(sorted(s))
+            if key not in d:
+                d[key] = []
+            d[key].append(s)
 
         return list(d.values())
