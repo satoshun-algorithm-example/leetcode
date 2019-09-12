@@ -10,6 +10,7 @@ class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         indices = [0 for _ in range(len(matrix))]
 
+        kk = 0
         while True:
             next_value = -1
             next_i = -1
@@ -24,5 +25,7 @@ class Solution:
                     next_i = i
 
             indices[next_i] += 1
-            if sum(indices) == k:
+            kk += 1
+
+            if kk == k:
                 return next_value
