@@ -11,7 +11,24 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        n = len(matrix)
-        for x in range(len(matrix)):
-            for y in range(len(matrix)):
-                matrix[x][y] = matrix[n - 1 - y][x]
+        tmp = matrix[0][2]
+        matrix[0][2] = matrix[0][0]
+
+        tmp2 = matrix[2][2]
+        matrix[2][2] = tmp
+
+        tmp3 = matrix[2][0]
+        matrix[2][0] = tmp2
+
+        matrix[0][0] = tmp3
+
+        tmp = matrix[1][2]
+        matrix[1][2] = matrix[0][1]
+
+        tmp2 = matrix[2][1]
+        matrix[2][1] = tmp
+
+        tmp3 = matrix[1][0]
+        matrix[1][0] = tmp2
+
+        matrix[0][1] = tmp3
