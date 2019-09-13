@@ -11,24 +11,7 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        tmp = matrix[0][2]
-        matrix[0][2] = matrix[0][0]
-
-        tmp2 = matrix[2][2]
-        matrix[2][2] = tmp
-
-        tmp3 = matrix[2][0]
-        matrix[2][0] = tmp2
-
-        matrix[0][0] = tmp3
-
-        tmp = matrix[1][2]
-        matrix[1][2] = matrix[0][1]
-
-        tmp2 = matrix[2][1]
-        matrix[2][1] = tmp
-
-        tmp3 = matrix[1][0]
-        matrix[1][0] = tmp2
-
-        matrix[0][1] = tmp3
+        matrix.reverse()
+        for i in range(len(matrix)):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
