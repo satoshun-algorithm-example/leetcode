@@ -11,34 +11,40 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        c = board[:]
-        ly = len(board)
-        lx = len(board[0])
-        for y in range(ly):
-            for x in range(lx):
-                lives = 0
-                if y - 1 >= 0 and x - 1 >= 0:
-                    lives += c[y - 1][x - 1]
-                if y - 1 >= 0:
-                    lives += c[y - 1][x]
-                if y - 1 >= 0 and x + 1 < lx:
-                    lives += c[y - 1][x + 1]
-                if x - 1 >= 0:
-                    lives += c[y][x - 1]
-                if x + 1 < lx:
-                    lives += c[y][x + 1]
-                if y + 1 < ly and x - 1 >= 0:
-                    lives += c[y + 1][x - 1]
-                if y + 1 < ly:
-                    lives += c[y + 1][x]
-                if y + 1 < ly and x + 1 < lx:
-                    lives += c[y + 1][x + 1]
-
-                if c[y][x]:
-                    if lives == 2 or lives == 3:
-                        pass
-                    else:
-                        board[y][x] = 0
+        ly, lx = len(board), len(board[0])
+        for i in range(ly):
+            for j in range(lx):
+                if board[i][j] == 0 or board[i][j] == 2:
+                    if self.nnb(board, i, j) == 3:
+                        board[i][j] = 2
                 else:
-                    if lives == 3:
-                        board[y][x] = 1
+                    if self.nnb(board, i, j) < 2 or self.nnb(board, i, j) > 3:
+                        board[i][j] = 3
+
+        for i in range(ly):
+            for j in range(lx):
+                if board[i][j] == 2:
+                    board[i][j] = 1
+                if board[i][j] == 3:
+                    board[i][j] = 0
+
+    def nnb(self, board, i, j):
+        m, n = len(board), len(board[0])
+        count = 0
+        if i - 1 >= 0 and j - 1 >= 0:
+            count += board[i - 1][j - 1] % 2
+        if i - 1 >= 0:
+            count += board[i - 1][j] % 2
+        if i - 1 >= 0 and j + 1 < n:
+            count += board[i - 1][j + 1] % 2
+        if j - 1 >= 0:
+            count += board[i][j - 1] % 2
+        if j + 1 < n:
+            count += board[i][j + 1] % 2
+        if i + 1 < m and j - 1 >= 0:
+            count += board[i + 1][j - 1] % 2
+        if i + 1 < m:
+            count += board[i + 1][j] % 2
+        if i + 1 < m and j + 1 < n:
+            count += board[i + 1][j + 1] % 2
+        return count
