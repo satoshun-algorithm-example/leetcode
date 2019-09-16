@@ -8,11 +8,19 @@ from typing import List
 
 class Solution:
     def findTargetSumWays(self, nums: List[int], S: int) -> int:
-        return self.check(nums, -S)
+        d = {}
+        return self.check(nums, -S, d)
 
-    def check(self, nums, number):
+    def check(self, nums, number, d):
         if not nums:
             return number == 0
 
+        key = (len(nums), number)
+        cache = d.get(key)
+        if cache is not None:
+            return cache
+
         v = nums[0]
-        return self.check(nums[1:], number - v) + self.check(nums[1:], number + v)
+        result = self.check(nums[1:], number - v, d) + self.check(nums[1:], number + v, d)
+        d[key] = result
+        return result
