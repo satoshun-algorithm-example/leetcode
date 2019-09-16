@@ -9,6 +9,7 @@ from typing import List
 class Solution:
     def findTargetSumWays(self, nums: List[int], S: int) -> int:
         d = {}
+        nums.sort()
         return self.check(nums, -S, d)
 
     def check(self, nums, number, d):
