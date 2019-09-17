@@ -11,7 +11,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        for i in range(len(nums)):
-            for j in range(len(nums) - 1, i, -1):
-                if nums[j] < nums[j - 1]:
-                    nums[j], nums[j - 1] = nums[j - 1], nums[j]
+        if nums:
+            left = 0
+            pivot = nums[-1]
+            for i in range(len(nums)):
+                if nums[i] < pivot:
+                    nums[i], nums[left] = nums[left], nums[i]
+                    left += 1
+
+            nums[left], nums[-1] = nums[-1], nums[left]
+
+            self.sortColors(nums[:left])
+            self.sortColors(nums[left + 1:])
