@@ -9,18 +9,13 @@ import sys
 
 class Solution:
     def numSquares(self, n: int) -> int:
-        m = sys.maxsize
-        for start in range(1, int(math.sqrt(n))):
-            current = n
-            count = 0
-            for end in range(start, 0, -1):
-                a = end ** 2
-                while current >= a:
-                    current -= a
-                    count += 1
-                if current == 0:
-                    break
+        if not n:
+            return 0
 
-            m = min(count, m)
+        dp = [sys.maxsize for _ in range(n + 1)]
+        dp[0] = 0
+        for i in range(1, n + 1):
+            for j in range(1, int(math.sqrt(i)) + 1):
+                dp[i] = min(dp[i], dp[i - j * j] + 1)
 
-        return m
+        return dp[n]
