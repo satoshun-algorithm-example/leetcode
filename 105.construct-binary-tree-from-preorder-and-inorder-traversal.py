@@ -14,4 +14,10 @@ from typing import List
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        pass
+        if inorder:
+            index = inorder.index(preorder.pop(0))
+            root = TreeNode(inorder[index])
+            root.left = self.buildTree(preorder, inorder[0:index])
+            root.right = self.buildTree(preorder, inorder[index + 1:])
+
+            return root
