@@ -11,13 +11,13 @@ class Solution:
         if not digits:
             return []
 
-        digits = sorted(digits)
         table = {2: 'abc', 3: 'def', 4: 'ghi', 5: 'jkl', 6: 'mno', 7: 'pqrs', 8: 'tuv', 9: 'wxyz'}
         l = []
 
         def s(t, current):
             if not t:
-                l.append(current)
+                if current not in l:
+                    l.append(current)
                 return
 
             v = table[int(t[0])]
@@ -26,4 +26,4 @@ class Solution:
 
         s(digits, '')
 
-        return sorted(set(l))
+        return l
