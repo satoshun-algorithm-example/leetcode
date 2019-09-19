@@ -8,6 +8,8 @@ from typing import List
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
         ylen = len(grid)
         xlen = len(grid[0])
         c = 0
