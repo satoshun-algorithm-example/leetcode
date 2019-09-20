@@ -8,9 +8,12 @@ from typing import List
 
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        count, cur, res = {0: 1}, 0, 0
+        cache = {0: 1}
+        res = 0
+        total = 0
         for num in nums:
-            cur += num
-            res += count.get(cur - k, 0)
-            count[cur] = count.get(cur, 0) + 1
+            total += num
+            res += cache.get(total - k, 0)
+            cache[total] = cache.get(total, 0) + 1
+
         return res
