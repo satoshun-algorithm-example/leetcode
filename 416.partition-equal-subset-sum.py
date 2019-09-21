@@ -18,5 +18,8 @@ class Solution:
         total = total // 2
         dp = [False for _ in range(total + 1)]
         dp[0] = True
+        for i in range(1, len(nums)):
+            for j in range(total, nums[i] - 1, -1):
+                dp[j] = dp[j] or dp[j - nums[i]]
 
         return dp[total]
