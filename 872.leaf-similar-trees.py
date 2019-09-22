@@ -12,18 +12,12 @@
 
 class Solution:
     def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
-        def dig(node, target):
+        def dig(node):
             if not node:
-                return
+                return []
             if not node.left and not node.right:
-                target.append(node.val)
-                return
+                return [node.val]
 
-            dig(node.left, target)
-            dig(node.right, target)
+            return dig(node.left) + dig(node.right)
 
-        leaf1 = []
-        dig(root1, leaf1)
-        leaf2 = []
-        dig(root2, leaf2)
-        return leaf1 == leaf2
+        return dig(root1) == dig(root2)
