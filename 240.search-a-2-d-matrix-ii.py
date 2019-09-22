@@ -14,7 +14,10 @@ class Solution:
             return False
         for y in range(len(matrix)):
             for x in range(len(matrix[0])):
-                if matrix[y][x] == target:
+                v = matrix[y][x]
+                if v == target:
                     return True
+                if target < v:
+                    break
 
         return False
