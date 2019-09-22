@@ -12,12 +12,14 @@ class Solution:
         """
         if not matrix:
             return False
-        for y in range(len(matrix)):
-            for x in range(len(matrix[0])):
-                v = matrix[y][x]
-                if v == target:
-                    return True
-                if target < v:
-                    break
+
+        row, col = len(matrix[0]) - 1, 0
+        while row >= 0 and col < len(matrix):
+            if matrix[col][row] == target:
+                return True
+            elif matrix[col][row] > target:
+                row -= 1
+            else:
+                col += 1
 
         return False
