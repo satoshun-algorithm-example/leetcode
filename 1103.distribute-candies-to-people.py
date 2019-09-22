@@ -8,14 +8,10 @@ from typing import List
 
 class Solution:
     def distributeCandies(self, candies: int, num_people: int) -> List[int]:
-        res = [0 for _ in range(num_people)]
+        res = [0] * num_people
         value = 1
-        while candies:
-            if value >= candies:
-                res[(value - 1) % num_people] += candies
-                break
-            else:
-                res[(value - 1) % num_people] += value
+        while candies > 0:
+            res[(value - 1) % num_people] += min(candies, value)
             candies -= value
             value += 1
 
