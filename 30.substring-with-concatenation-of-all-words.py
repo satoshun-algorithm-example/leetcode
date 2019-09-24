@@ -12,17 +12,16 @@ class Solution:
             return []
 
         total = []
-
         for i in range(len(s)):
-            if self.find_prefix(s, str):
+            if self.find_prefix(s[i:], words):
                 total.append(i)
 
         return total
 
     def find_prefix(self, s: str, words):
-        if not words and not s:
+        if not words:
             return True
-        if not words or not s:
+        if not s:
             return False
 
         for i in range(len(words)):
