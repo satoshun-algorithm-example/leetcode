@@ -15,7 +15,7 @@ class Solution:
         # fast path
         is_q = self.same_path(q, p)
         if is_q:
-            return is_q
+            return q
 
         while True:
             is_p = self.same_path(p, q)
