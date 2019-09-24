@@ -20,7 +20,7 @@ class Solution:
         while True:
             is_p = self.same_path(p, q)
             if is_p:
-                return is_p
+                return p
 
             p = self.get_parent(root, p)
 
