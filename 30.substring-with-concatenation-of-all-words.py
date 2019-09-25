@@ -14,11 +14,12 @@ class Solution:
         word = words[0]
         max_len = len(word) * len(words)
         total = []
+        d = {}
+        for word in words:
+            d[word] = d.get(word, 0) + 1
         for i in range(len(s) - max_len + 1):
-            d = {}
-            for word in words:
-                d[word] = d.get(word, 0) + 1
-            if self.find_prefix(s[i:], d):
+            dd = d.copy()
+            if self.find_prefix(s[i:], dd):
                 total.append(i)
 
         return total
