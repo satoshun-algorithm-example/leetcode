@@ -11,7 +11,8 @@ class Solution:
         if not s or not words:
             return []
 
-        max_len = sum(len(word) for word in words)
+        word = words[0]
+        max_len = len(word) * len(words)
         total = []
         for i in range(len(s) - max_len + 1):
             if self.find_prefix(s[i:], words):
@@ -30,8 +31,7 @@ class Solution:
             if words[i] in checked:
                 continue
             if s.startswith(words[i]):
-                if self.find_prefix(s[len(words[i]):], words[:i] + words[i + 1:]):
-                    return True
+                return self.find_prefix(s[len(words[i]):], words[:i] + words[i + 1:])
             checked.append(words[i])
 
         return False
