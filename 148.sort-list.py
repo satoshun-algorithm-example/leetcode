@@ -43,6 +43,7 @@ class Solution:
                     continue
                 else:
                     before.next = current.next
+                    current.next = new_last.next
                     new_last.next = current
                     new_last = current
             else:
