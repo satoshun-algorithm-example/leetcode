@@ -31,7 +31,7 @@ class Solution:
         before = None
         current = head
         new_last = last
-        while current and current.val != last.val:
+        while current and current != last:
             if last.val < current.val:
                 if not before:
                     head = current.next
@@ -54,6 +54,6 @@ class Solution:
 
         head = self.sort(head, before)
         self.sort(last, new_last)
-        #  [4,19,14,5,-3,1,8,5,11,15]
+        # [4,19,14,5,-3,1,8,5,11,15]
 
         return head
