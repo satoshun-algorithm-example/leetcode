@@ -12,10 +12,22 @@ class Solution:
             return []
 
         indices = []
-        p = sorted(p)
+        d = {}
+        for c in p:
+            d[c] = d.get(c, 0) + 1
         word_len = len(p)
+
+        dd = {}
+        for c in s[:word_len]:
+            dd[c] = dd.get(c, 0) + 1
+
         for i in range(len(s) - word_len + 1):
-            if sorted(s[i:i + word_len]) == p:
+            if i != 0:
+                dd[s[i + word_len - 1]] = dd.get(s[i + word_len - 1], 0) + 1
+                dd[s[i - 1]] -= 1
+                if dd[s[i - 1]] == 0:
+                    del dd[s[i - 1]]
+            if d == dd:
                 indices.append(i)
 
         return indices
