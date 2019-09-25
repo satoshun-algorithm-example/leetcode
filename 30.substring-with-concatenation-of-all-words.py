@@ -25,9 +25,13 @@ class Solution:
         if not s:
             return False
 
+        checked = []
         for i in range(len(words)):
+            if words[i] in checked:
+                continue
             if s.startswith(words[i]):
                 if self.find_prefix(s[len(words[i]):], words[:i] + words[i + 1:]):
                     return True
+            checked.append(words[i])
 
         return False
