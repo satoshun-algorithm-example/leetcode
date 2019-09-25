@@ -35,16 +35,21 @@ class Solution:
             if last.val < current.val:
                 if not before:
                     head = current.next
-                    current.next = None
+                    current.next = new_last.next
+                    new_last.next = current
+                    new_last = current
+
+                    current = head
+                    continue
                 else:
                     before.next = current.next
-                new_last.next = current
-                new_last = current
+                    new_last.next = current
+                    new_last = current
             else:
                 before = current
             current = current.next
 
-        self.sort(head, before)
+        head = self.sort(head, before)
         self.sort(last, new_last)
 
         return head
