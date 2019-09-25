@@ -11,12 +11,13 @@ class Solution:
         if not s or not words:
             return []
 
+        d = {}
+        for w in words:
+            d[w] = d.get(w, 0) + 1
+
         word = words[0]
         max_len = len(word) * len(words)
         total = []
-        d = {}
-        for word in words:
-            d[word] = d.get(word, 0) + 1
         for i in range(len(s) - max_len + 1):
             dd = d.copy()
             if self.find_prefix(s[i:], dd):
