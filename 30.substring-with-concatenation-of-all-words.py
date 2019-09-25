@@ -11,8 +11,9 @@ class Solution:
         if not s or not words:
             return []
 
+        max_len = sum(len(word) for word in words)
         total = []
-        for i in range(len(s)):
+        for i in range(len(s) - max_len + 1):
             if self.find_prefix(s[i:], words):
                 total.append(i)
 
