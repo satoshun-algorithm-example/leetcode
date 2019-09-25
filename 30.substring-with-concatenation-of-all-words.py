@@ -15,23 +15,25 @@ class Solution:
         max_len = len(word) * len(words)
         total = []
         for i in range(len(s) - max_len + 1):
-            if self.find_prefix(s[i:], words):
+            d = {}
+            for word in words:
+                d[word] = d.get(word, 0) + 1
+            if self.find_prefix(s[i:], d):
                 total.append(i)
 
         return total
 
-    def find_prefix(self, s: str, words):
-        if not words:
+    def find_prefix(self, s: str, d: dict):
+        if not d:
             return True
         if not s:
             return False
 
-        checked = []
-        for i in range(len(words)):
-            if words[i] in checked:
-                continue
-            if s.startswith(words[i]):
-                return self.find_prefix(s[len(words[i]):], words[:i] + words[i + 1:])
-            checked.append(words[i])
+        for key in d.keys():
+            if s.startswith(key):
+                d[key] -= 1
+                if d[key] == 0:
+                    del d[key]
+                return self.find_prefix(s[len(key):], d)
 
         return False
