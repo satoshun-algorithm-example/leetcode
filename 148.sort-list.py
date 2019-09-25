@@ -46,11 +46,14 @@ class Solution:
                     current.next = new_last.next
                     new_last.next = current
                     new_last = current
+                    current = before.next
+                    continue
             else:
                 before = current
             current = current.next
 
         head = self.sort(head, before)
         self.sort(last, new_last)
+        #  [4,19,14,5,-3,1,8,5,11,15]
 
         return head
