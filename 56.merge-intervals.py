@@ -10,6 +10,7 @@ class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         res = []
         i = 0
+        intervals.sort()
         while len(intervals) > i:
             target = intervals[i]
             i += 1
