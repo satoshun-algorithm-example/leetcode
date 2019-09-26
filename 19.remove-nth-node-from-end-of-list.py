@@ -16,12 +16,14 @@ class Solution:
             nth_node = nth_node.next
 
         start_node = head
-        while nth_node and nth_node.next:
+        before = None
+        while nth_node:
             nth_node = nth_node.next
+            before = start_node
             start_node = start_node.next
 
-        if start_node == head:
-            head = start_node.next
-        else:
-            start_node.next = start_node.next.next
+        if not before:
+            return start_node.next
+
+        before.next = before.next.next
         return head
