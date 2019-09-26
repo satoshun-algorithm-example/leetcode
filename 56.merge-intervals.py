@@ -15,7 +15,9 @@ class Solution:
             i += 1
             while len(intervals) > i and \
                     ((intervals[i][0] <= target[0] <= intervals[i][1]) or
-                     (intervals[i][0] <= target[1] <= intervals[i][1])):
+                     (intervals[i][0] <= target[1] <= intervals[i][1]) or
+                     (target[0] <= intervals[i][0] <= target[1]) or
+                     (target[0] <= intervals[i][1] <= target[1])):
                 target[0] = min(target[0], intervals[i][0])
                 target[1] = max(target[1], intervals[i][1])
                 i += 1
