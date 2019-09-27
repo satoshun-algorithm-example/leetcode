@@ -15,6 +15,9 @@ class Solution:
                     start = i
                 else:
                     end = i
+            else:
+                if start != -1:
+                    break
         if start != -1 and end == -1:
             end = start
 
