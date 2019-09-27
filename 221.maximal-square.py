@@ -23,8 +23,10 @@ class Solution:
         n = 1
         while True:
             a = 0
-            for yy in range(y):
-                a += sum(matrix[yy][x: x + n])
+            for yy in range(n):
+                if len(matrix) <= yy + y:
+                    break
+                a += sum(matrix[yy + y][x: x + n])
             if a != (n ** 2):
                 break
             n += 1
