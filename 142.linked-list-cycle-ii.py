@@ -14,15 +14,12 @@ class Solution:
         if not head:
             return None
 
+        elements = [head]
         slow = head
-        fast = slow
-        while fast:
+        while slow:
             slow = slow.next
-            if not fast.next:
-                return None
-            fast = fast.next.next
-
-            if slow == fast:
-                return fast
+            if slow in elements:
+                return slow
+            elements.append(slow)
 
         return None
