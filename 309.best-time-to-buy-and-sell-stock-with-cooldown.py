@@ -17,24 +17,25 @@ class Solution:
         if not prices:
             return profit
 
-        before_profit = cache.get((transaction, len(prices)))
-        if before_profit and before_profit >= profit:
+        before_profit = cache.get((transaction, len(prices)), None)
+        if before_profit is not None and before_profit >= profit:
             return 0
+
+        cache[(transaction, len(prices))] = profit
 
         if transaction == 'buy':
             max_profit = max(
                 profit,
-                self.calculate(prices[2:], 'cooldown', cache, profit) + prices[0],
+                self.calculate(prices[2:], 'cooldown', cache, profit + prices[0]),
                 self.calculate(prices[1:], 'buy', cache, profit)
             )
         else:
             max_profit = max(
                 profit,
-                self.calculate(prices[1:], 'buy', cache, profit) - prices[0],
+                self.calculate(prices[1:], 'buy', cache, profit - prices[0]),
                 self.calculate(prices[1:], 'cooldown', cache, profit)
             )
 
-        cache[(transaction, len(prices))] = profit
         return max_profit
 
 # @lc code=end
