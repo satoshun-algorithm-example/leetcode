@@ -10,32 +10,18 @@ from typing import List
 # @lc code=start
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        cache = {}
-        return self.calculate(prices, 'cooldown', cache, 0)
-
-    def calculate(self, prices, transaction, cache, profit):
-        if not prices:
-            return profit
-
-        before_profit = cache.get((transaction, len(prices)), None)
-        if before_profit is not None and before_profit >= profit:
+        if len(prices) < 2:
             return 0
+        rest = [0 for _ in range(len(prices))]
+        buy = [0 for _ in range(len(prices))]
+        down = [0 for _ in range(len(prices))]
 
-        cache[(transaction, len(prices))] = profit
+        buy[0] = -prices[0]
+        for i in range(1, len(prices)):
+            rest[i] = max(rest[i - 1], down[i - 1])
+            buy[i] = max(buy[i - 1], rest[i - 1] - prices[i])
+            down[i] = buy[i - 1] + prices[i]
 
-        if transaction == 'buy':
-            max_profit = max(
-                profit,
-                self.calculate(prices[2:], 'cooldown', cache, profit + prices[0]),
-                self.calculate(prices[1:], 'buy', cache, profit)
-            )
-        else:
-            max_profit = max(
-                profit,
-                self.calculate(prices[1:], 'buy', cache, profit - prices[0]),
-                self.calculate(prices[1:], 'cooldown', cache, profit)
-            )
-
-        return max_profit
+        return max(rest[-1], down[-1])
 
 # @lc code=end
