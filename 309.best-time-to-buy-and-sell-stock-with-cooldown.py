@@ -10,9 +10,23 @@ from typing import List
 # @lc code=start
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        dfs = [0 for _ in range(len(prices))]
-        for i in range(len(prices)):
-            pass
+        return self.calculate(prices, 'cooldown', 0)
 
-        return dfs[-1]
+    def calculate(self, prices, transaction, profit):
+        if not prices:
+            return profit
+
+        if transaction == 'buy':
+            return max(
+                profit,
+                self.calculate(prices[2:], 'cooldown', profit) + prices[0],
+                self.calculate(prices[1:], 'buy', profit)
+            )
+        else:
+            return max(
+                profit,
+                self.calculate(prices[1:], 'buy', profit) - prices[0],
+                self.calculate(prices[1:], 'cooldown', profit)
+            )
+
 # @lc code=end
