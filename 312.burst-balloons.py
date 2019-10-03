@@ -14,8 +14,8 @@ class Solution:
         return self.search(nums, 0, s, cache)
 
     def search(self, nums, value, consumed, cache):
-        # if cache.get(consumed, -1) >= value:
-        #     return value
+        if cache.get(consumed, -1) >= value:
+            return value
         cache[consumed] = value
 
         m = value
