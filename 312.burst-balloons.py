@@ -9,38 +9,23 @@ from typing import List
 # @lc code=start
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
-        cache = {}
-        s = "".join(("0" for _ in range(len(nums))))
-        return self.search(nums, 0, s, cache)
+        nums = [1] + [num for num in nums if num > 0] + [1]
+        cache = [[0] * len(nums) for _ in range(len(nums))]
+        return self.search(nums, 0, len(nums) - 1, cache)
 
-    def search(self, nums, value, consumed, cache):
-        if cache.get(consumed, -1) >= value:
-            return value
-        cache[consumed] = value
+    def search(self, nums, left, right, cache):
+        if left + 1 == right:
+            return 0
+        if cache[left][right] > 0:
+            return cache[left][right]
 
-        m = value
-        for i in range(len(nums)):
-            if consumed[i] == "1":
-                continue
+        value = 0
+        for i in range(left + 1, right):
+            d = nums[left] * nums[i] * nums[right]
+            value = max(
+                value,
+                self.search(nums, left, i, cache) + d + self.search(nums, i, right, cache))
 
-            left = 1
-            j = i
-            while j - 1 >= 0:
-                if consumed[j - 1] == '0':
-                    left = nums[j - 1]
-                    break
-                j -= 1
-
-            right = 1
-            j = i
-            while j + 1 < len(nums):
-                if consumed[j + 1] == '0':
-                    right = nums[j + 1]
-                    break
-                j += 1
-
-            point = left * nums[i] * right
-            m = max(m, self.search(nums, value + point, consumed[:i] + '1' + consumed[i + 1:], cache))
-
-        return m
+        cache[left][right] = value
+        return value
 # @lc code=end
