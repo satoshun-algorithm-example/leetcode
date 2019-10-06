@@ -16,15 +16,15 @@ class Solution:
             for x in range(len(matrix[-1])):
                 if matrix[y][x] == 0:
                     for xx in range(len(matrix[-1])):
-                        if matrix[y][xx] == 1:
-                            matrix[y][xx] = 2
+                        if matrix[y][xx] != 0:
+                            matrix[y][xx] = "mark"
                     for yy in range(len(matrix)):
-                        if matrix[yy][x] == 1:
-                            matrix[yy][x] = 2
+                        if matrix[yy][x] != 0:
+                            matrix[yy][x] = "mark"
 
         for y in range(len(matrix)):
             for x in range(len(matrix[-1])):
-                if matrix[y][x] == 2:
+                if matrix[y][x] == "mark":
                     matrix[y][x] = 0
 
 # @lc code=end
