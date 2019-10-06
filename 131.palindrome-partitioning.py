@@ -21,6 +21,6 @@ class Solution:
 
         for j in range(i + 1, len(s) + 1):
             if s[i:j] == s[i:j][::-1]:
-                self.palindrome(j + 1, s, pali + [s[i:j]], palindromes)
+                self.palindrome(j, s, pali + [s[i:j]], palindromes)
 
 # @lc code=end
