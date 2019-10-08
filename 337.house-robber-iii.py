@@ -12,6 +12,8 @@
 
 class Solution:
     def rob(self, root: TreeNode) -> int:
+        if not root:
+            return 0
         dfs = [0, 0]
         stack = [root]
         while stack:
