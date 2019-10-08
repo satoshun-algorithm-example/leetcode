@@ -5,8 +5,8 @@
 #
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        sa = str(a)
-        sb = str(b)
+        sa = "{0:b}".format(a)
+        sb = "{0:b}".format(b)
         if len(sa) > len(sb):
             sb = '0' * (len(sa) - len(sb)) + sb
         else:
@@ -19,7 +19,10 @@ class Solution:
             d = int(sa[i]) ^ int(sb[i])
             d = d ^ carry
 
-            carry = (sa[i] and sb[i]) or (sa[i] and carry) or (sb[i] and carry)
-            s = s or (d << i)
+            carry = (int(sa[i]) and int(sb[i])) or (int(sa[i]) and carry) or (int(sb[i]) and carry)
+            s = s | (d << i)
+
+        if carry:
+            s = s | (1 << len(sa))
 
         return s
