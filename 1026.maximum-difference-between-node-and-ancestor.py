@@ -12,23 +12,22 @@
 #         self.left = None
 #         self.right = None
 
+import sys
+
+
 class Solution:
     def maxAncestorDiff(self, root: TreeNode) -> int:
-        m = 0
+        return self.calculate(root, 0, sys.maxsize)
 
-        def search(node, parents):
-            nonlocal m
+    def calculate(self, node, mx, mi):
+        if not node:
+            return mx - mi
 
-            if not node:
-                return
-            for parent in parents:
-                mm = abs(parent.val - node.val)
-                if mm > m:
-                    m = mm
-            search(node.left, parents + [node])
-            search(node.right, parents + [node])
-
-        search(root, [])
-        return m
+        mx = max(node.val, mx)
+        mi = min(node.val, mi)
+        return max(
+            self.calculate(node.left, mx, mi),
+            self.calculate(node.right, mx, mi),
+        )
 
 # @lc code=end
