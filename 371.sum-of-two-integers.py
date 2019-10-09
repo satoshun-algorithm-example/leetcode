@@ -5,24 +5,14 @@
 #
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        sa = "{0:b}".format(a)
-        sb = "{0:b}".format(b)
-        if len(sa) > len(sb):
-            sb = '0' * (len(sa) - len(sb)) + sb
-        else:
-            sa = '0' * (len(sb) - len(sa)) + sa
+        if a == 0:
+            return b
+        if b == 0:
+            return a
 
-        sa, sb = list(reversed(sa)), list(reversed(sb))
-        s = 0
-        carry = 0
-        for i in range(len(sa)):
-            d = int(sa[i]) ^ int(sb[i])
-            d = d ^ carry
+        while b:
+            carry = a & b
+            a = a ^ b
+            b = carry << 1
 
-            carry = (int(sa[i]) and int(sb[i])) or (int(sa[i]) and carry) or (int(sb[i]) and carry)
-            s = s | (d << i)
-
-        if carry:
-            s = s | (1 << len(sa))
-
-        return s
+        return a
