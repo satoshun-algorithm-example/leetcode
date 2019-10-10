@@ -7,20 +7,21 @@
 # @lc code=start
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
-        c = 0
-        for i in range(len(tiles)):
-            target = set()
-            self.calculate("", tiles, target, i + 1)
-            c += len(target)
+        d = {}
+        for tile in tiles:
+            d[tile] = d.get(tile, 0) + 1
 
-        return c
+        def dfs():
+            total = 0
+            for key in d.keys():
+                if not d[key]:
+                    continue
+                total += 1
+                d[key] -= 1
+                total += dfs()
+                d[key] += 1
+            return total
 
-    def calculate(self, current, remain, target, count):
-        if not count:
-            target.add(current)
-            return
-
-        for i in range(len(remain)):
-            self.calculate(current + remain[i], remain[:i] + remain[i + 1:], target, count - 1)
+        return dfs()
 
 # @lc code=end
