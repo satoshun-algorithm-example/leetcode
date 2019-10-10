@@ -5,4 +5,12 @@
 #
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        return a + b
+        if a < 0 or b < 0:
+            # TODO subtract
+            return a + b
+
+        while b:
+            tmp = a & b
+            a = a ^ b
+            b = tmp << 1
+        return a
