@@ -16,16 +16,15 @@ class Solution:
     def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
         node = root
         while node:
-            if node.val > val and not node.left:
-                node.left = TreeNode(val)
-                break
-            if node.val < val and not node.right:
-                node.right = TreeNode(val)
-                break
-
             if node.val > val:
+                if not node.left:
+                    node.left = TreeNode(val)
+                    break
                 node = node.left
             else:
+                if not node.right:
+                    node.right = TreeNode(val)
+                    break
                 node = node.right
 
         return root
