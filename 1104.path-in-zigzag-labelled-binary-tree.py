@@ -9,26 +9,16 @@ from typing import List
 # @lc code=start
 class Solution:
     def pathInZigZagTree(self, label: int) -> List[int]:
-        if not label:
-            return []
-
-        if label == 1:
-            return [label]
-
-        path = [label]
-        depth = 0
-        while label >= depth ** 2:
+        res = []
+        depth = 1
+        while label >= 2 ** depth:
             depth += 1
 
-        while depth:
-            if depth % 2 == 0:
-                position = (((depth - 1) ** 2 + 1) // 2)
-                label = label - position
-            else:
-                position = (((depth - 1) ** 2 + 1) // 2)
-                label = label - position
-            path.insert(0, label)
+        while label:
+            res.insert(0, label)
+            label = ((2 ** depth - 1) + (2 ** (depth - 1)) - label) // 2
             depth -= 1
-        return [1] + path
+
+        return res
 
 # @lc code=end
