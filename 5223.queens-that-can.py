@@ -43,7 +43,7 @@ class Solution:
             i = 0
             for y in range(king[0] + 1, 8):
                 i += 1
-                position = [y, king[1] - 1]
+                position = [y, king[1] - i]
                 for queen in queens:
                     if queen == position:
                         attacks.append(queen)
