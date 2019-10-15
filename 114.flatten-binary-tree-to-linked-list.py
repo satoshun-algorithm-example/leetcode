@@ -31,6 +31,9 @@ class Solution:
         search(root)
 
         for i in range(len(nodes) - 1, 0, -1):
-            nodes[i].right = nodes[i - 1]
+            nodes[i - 1].right = nodes[i]
+
+        for node in nodes:
+            node.left = None
 
 # @lc code=end
