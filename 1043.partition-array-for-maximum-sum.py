@@ -19,10 +19,10 @@ class Solution:
         for i in range(1, len(A)):
             m = 0
             for j in range(K):
+                m = max(m, A[i - j])
                 if i - j - 1 < 0:
                     dp[i] = max(dp[i], (j + 1) * m)
                     break
-                m = max(m, A[i - j])
                 dp[i] = max(dp[i], dp[i - j - 1] + (j + 1) * m)
 
         return dp[-1]
