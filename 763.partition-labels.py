@@ -16,11 +16,11 @@ class Solution:
         last = S.rindex(S[0])
         for i in range(len(S)):
             if i == last:
-                res.append(last - sum(res))
+                res.append(last - sum(res) + 1)
             else:
                 last = max(last, S.rindex(S[i]))
                 if i == last:
-                    res.append(last - sum(res))
+                    res.append(last - sum(res) + 1)
 
         return res
 
