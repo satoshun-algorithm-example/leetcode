@@ -4,26 +4,24 @@
 # [5231]
 #
 from typing import List
+import re
 
 
-# @lc code=start
 class Solution:
     def removeSubfolders(self, folder: List[str]) -> List[str]:
         folder.sort()
         sub_folder = []
+        sub_re = ""
         for path in folder:
             is_match = False
-            for i, sub in enumerate(sub_folder):
-                if (sub + "/").startswith(path + "/"):
-                    sub_folder[i] = path
-                    is_match = True
-                    break
-                if (path + "/").startswith(sub + "/"):
-                    is_match = True
-                    break
+
+            if sub_re:
+                is_match = re.match(sub_re, path + "/")
+
             if not is_match:
+                if sub_re:
+                    sub_re += "|"
+                sub_re += path + "/"
                 sub_folder.append(path)
 
         return sub_folder
-
-# @lc code=end
