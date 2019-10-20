@@ -12,16 +12,18 @@ class Solution:
         folder.sort()
         sub_folder = []
         sub_re = ""
+        sub_re_re = None
         for path in folder:
             is_match = False
 
             if sub_re:
-                is_match = re.match(sub_re, path + "/")
+                is_match = sub_re_re.match(path + "/")
 
             if not is_match:
                 if sub_re:
                     sub_re += "|"
                 sub_re += path + "/"
+                sub_re_re = re.compile(sub_re)
                 sub_folder.append(path)
 
         return sub_folder
