@@ -10,9 +10,9 @@ from typing import List
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         def move(x, y, land):
-            if x >= len(grid[0]):
+            if x >= len(grid[0]) or x < 0:
                 return land
-            if y >= len(grid):
+            if y >= len(grid) or y < 0:
                 return land
             if grid[y][x] == 0:
                 return land
