@@ -8,15 +8,15 @@ from typing import List
 
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        value = sum(nums) // 2
-        if value % 2 == 1:
+        value = sum(nums)
+        if (value % 2) == 1:
             return False
+
+        value = value // 2
 
         dp = []
         for i in range(len(nums) + 1):
-            dp.append([False for _ in range(value + 1)])
-
-        for i in range(len(nums) + 1):
+            dp.append([False] * (value + 1))
             dp[i][0] = True
 
         for i in range(1, len(nums) + 1):
