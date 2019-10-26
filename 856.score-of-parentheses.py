@@ -16,6 +16,7 @@ class Solution:
                     d = 1
                 else:
                     d *= 2
+                before_closed = False
             else:
                 if not before_closed:
                     score += d
