@@ -24,20 +24,28 @@ class Solution:
                     ci1 -= 1
                 c1 = dp[ci1] + costs[0]
 
-                ci2 = min(i - 6, 0)
+                ci2 = max(day - 6, 0)
                 while dp.get(ci2) is None:
                     ci2 += 1
                 if ci2 == day:
                     c2 = dp[ci1] + costs[1]
                 else:
+                    if ci2 != 0:
+                        ci2 -= 1
+                        while dp.get(ci2) is None:
+                            ci2 -= 1
                     c2 = dp[ci2] + costs[1]
 
-                ci3 = min(i - 29, 0)
+                ci3 = max(day - 29, 0)
                 while dp.get(ci3) is None:
                     ci3 += 1
                 if ci3 == day:
                     c3 = dp[ci1] + costs[2]
                 else:
+                    if ci3 != 0:
+                        ci3 -= 1
+                        while dp.get(ci3) is None:
+                            ci3 -= 1
                     c3 = dp[ci3] + costs[2]
 
             dp[day] = min(c1, c2, c3)
