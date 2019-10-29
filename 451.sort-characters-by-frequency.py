@@ -7,12 +7,9 @@
 # @lc code=start
 class Solution:
     def frequencySort(self, s: str) -> str:
-        cache = {}
+        count_map = {}
+        for c in s:
+            count_map[c] = count_map.get(c, 0) + 1
 
-        def key(x):
-            if x in cache:
-                return cache[x], x
-            return cache.setdefault(x, s.count(x)), x
-
-        return "".join(sorted(s, key=key, reverse=True))
+        return "".join(sorted(s, key=lambda x: (count_map[x], x), reverse=True))
 # @lc code=end
