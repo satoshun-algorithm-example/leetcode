@@ -16,6 +16,9 @@ class Solution:
         end = len(nums) - 1
         n = (end + 1 + start) // 2
         while True:
+            if end == start:
+                return nums[end]
+
             if end - start == 2:
                 pivot = nums[n]
                 if nums[n - 1] == pivot:
@@ -29,11 +32,13 @@ class Solution:
                     end = n - 2
                 else:
                     start = n + 1
-            else:
+            elif nums[n + 1] == pivot:
                 if (end - start) // 2 % 2 == 0:
                     start = n + 2
                 else:
                     end = n - 1
+            else:
+                return nums[n]
 
             n = (end + 1 + start) // 2
 
