@@ -14,15 +14,21 @@ class Solution:
 
         start = 0
         end = len(nums) - 1
-        n = (end + 1 - start) // 2
+        n = (end + 1 + start) // 2
         while True:
             pivot = nums[n]
             if nums[n - 1] == pivot:
-                end = n - 2
+                if (end - start) // 2 % 2 == 0:
+                    end = n - 2
+                else:
+                    start = n + 1
             else:
-                start = n + 2
+                if (end - start) // 2 % 2 == 0:
+                    start = n + 2
+                else:
+                    end = n - 1
 
-            n = (end + 1 - start) // 2
+            n = (end + 1 + start) // 2
 
             if end - start == 2:
                 pivot = nums[n]
