@@ -16,33 +16,15 @@ from typing import List
 class Solution:
     def nextLargerNodes(self, head: ListNode) -> List[int]:
         res = []
-        node = head
-        while node:
-            res.append(node.val)
-            node = node.next
+        stack = []
+        while head:
+            while stack and stack[-1][1] < head.val:
+                res[stack[-1][0]] = head.val
+                stack.pop()
+            stack.append([len(res), head.val])
+            res.append(0)
 
-        q = []
-
-        def insert(i, value):
-            for index, qq in enumerate(q):
-                if qq[0] > value:
-                    q.insert(index, [value, i])
-                    return 
-
-            q.append([value, i])
-
-        for i in range(len(res)):
-            while q:
-                if q[0][0] < res[i]:
-                    res[q[0][1]] = res[i]
-                    q.pop(0)
-                else:
-                    break
-
-            insert(i, res[i])
-
-        for i in q:
-            res[i[1]] = 0
+            head = head.next
 
         return res
 
