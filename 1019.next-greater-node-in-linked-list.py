@@ -21,15 +21,19 @@ class Solution:
             res.append(node.val)
             node = node.next
 
+        q = []
         for i in range(len(res)):
-            have = False
-            for j in range(i + 1, len(res)):
-                if res[i] < res[j]:
-                    res[i] = res[j]
-                    have = True
+            while q:
+                if q[0][0] < res[i]:
+                    res[q[0][1]] = res[i]
+                    q.pop(0)
+                else:
                     break
-            if not have:
-                res[i] = 0
+            q.append([res[i], i])
+            sorted(q)
+
+        for i in q:
+            res[i[1]] = 0
 
         return res
 
