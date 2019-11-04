@@ -22,6 +22,15 @@ class Solution:
             node = node.next
 
         q = []
+
+        def insert(i, value):
+            for index, qq in enumerate(q):
+                if qq[0] > value:
+                    q.insert(index, [value, i])
+                    return 
+
+            q.append([value, i])
+
         for i in range(len(res)):
             while q:
                 if q[0][0] < res[i]:
@@ -29,8 +38,8 @@ class Solution:
                     q.pop(0)
                 else:
                     break
-            q.append([res[i], i])
-            q.sort()
+
+            insert(i, res[i])
 
         for i in q:
             res[i[1]] = 0
