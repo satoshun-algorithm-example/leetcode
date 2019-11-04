@@ -30,7 +30,7 @@ class Solution:
                 else:
                     break
             q.append([res[i], i])
-            sorted(q)
+            q.sort()
 
         for i in q:
             res[i[1]] = 0
