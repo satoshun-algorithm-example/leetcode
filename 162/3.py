@@ -16,13 +16,13 @@ class Solution:
             grid[y][x] = 1
             is_land = True
             if grid[y][x - 1] == 0:
-                is_land = is_land and closed(y, x - 1)
+                is_land = closed(y, x - 1) and is_land
             if grid[y][x + 1] == 0:
-                is_land = is_land and closed(y, x + 1)
+                is_land = closed(y, x + 1) and is_land
             if grid[y - 1][x] == 0:
-                is_land = is_land and closed(y - 1, x)
+                is_land = closed(y - 1, x) and is_land
             if grid[y + 1][x] == 0:
-                is_land = is_land and closed(y + 1, x)
+                is_land = closed(y + 1, x) and is_land
 
             return is_land
 
