@@ -9,21 +9,24 @@ from typing import List
 # @lc code=start
 class Solution:
     def shipWithinDays(self, weights: List[int], D: int) -> int:
-        capacity = max(weights)
+        left = max(weights)
+        right = sum(weights)
 
-        while True:
+        while left < right:
+            mid = (left + right) // 2
             d = 1
             current = 0
             for weight in weights:
                 current += weight
-                if current > capacity:
+                if current > mid:
                     d += 1
                     current = weight
 
-            if d <= D:
-                break
-            capacity += 1
+            if d > D:
+                left = mid + 1
+            else:
+                right = mid
 
-        return capacity
+        return left
 
 # @lc code=end
