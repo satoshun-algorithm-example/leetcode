@@ -21,7 +21,7 @@ class Solution:
                 return
 
             if height in cache:
-                if cache[height] <= len(remains):
+                if cache[height] < len(remains):
                     return
 
             remain = remains[0]
@@ -38,8 +38,8 @@ class Solution:
 
             # next height or next width
             search(remains[1:], remain[0], height + remain[1], remain[1])
-            search(remains[1:], width + remain[0], height - book_height + remain[1], remain[1])
             cache[height + remain[1]] = len(remains) - 1
+            search(remains[1:], width + remain[0], height - book_height + remain[1], remain[1])
             return
 
         if not books:
