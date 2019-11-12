@@ -15,7 +15,7 @@ class Solution:
             if a == 0:
                 group.append(i)
             else:
-                if not group:
+                if group:
                     zero_group[len(zero_group)] = group
                     group = []
 
@@ -35,6 +35,7 @@ class Solution:
                 for a in A:
                     if a == 0:
                         max_count = max(m, max_count)
+                        m = 0
                     else:
                         m += 1
 
@@ -56,6 +57,7 @@ class Solution:
                 for a in A:
                     if a == 0:
                         max_count = max(m, max_count)
+                        m = 0
                     else:
                         m += 1
                 for g in group[:remain]:
@@ -67,6 +69,7 @@ class Solution:
                 for a in A:
                     if a == 0:
                         max_count = max(m, max_count)
+                        m = 0
                     else:
                         m += 1
                 for g in group[len(group) - remain:]:
