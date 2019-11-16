@@ -25,8 +25,8 @@ class Solution:
         a_indices = [i for i in range(len(a_group)) if a_group[i] == a_max]
         b_max = 0
         for index in a_indices:
-            start = max(0, index - L)
-            end = index + L
+            start = max(0, index - M)
+            end = index + L + M
             b_max = max(b_max, max(b_group[:start] + b_group[end:]))
 
         res = a_max + b_max
@@ -36,8 +36,8 @@ class Solution:
         b_indices = [i for i in range(len(b_group)) if b_group[i] == b_max]
         a_max = 0
         for index in b_indices:
-            start = max(0, index - M)
-            end = index + M
+            start = max(0, index - L)
+            end = index + M + L
             a_max = max(a_max, max(a_group[:start] + a_group[end:]))
 
         return max(res, a_max + b_max)
