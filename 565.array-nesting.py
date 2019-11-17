@@ -9,17 +9,12 @@ from typing import List
 # @lc code=start
 class Solution:
     def arrayNesting(self, nums: List[int]) -> int:
-        visited = {}
         m = 0
         for s in range(len(nums)):
-            if s in visited:
-                continue
-
             current = 0
-            while s not in visited:
+            while nums[s] >= 0:
                 current += 1
-                visited[s] = True
-                s = nums[s]
+                nums[s], s = -1, nums[s]
 
             m = max(m, current)
 
