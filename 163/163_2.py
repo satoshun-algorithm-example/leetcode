@@ -31,7 +31,7 @@ class FindElements:
         start = 0
         end = len(self.values)
         while start < end:
-            mid = (end - start) // 2
+            mid = (end + start) // 2
             if self.values[mid] == target:
                 return True
             elif self.values[mid] > target:
