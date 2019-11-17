@@ -6,13 +6,40 @@
 #         self.right = None
 
 class FindElements:
-
     def __init__(self, root: TreeNode):
-        pass
+        root.value = 0
+        nodes = [root]
+        while nodes:
+            new_nodes = []
+            for node in nodes:
+                if node.left:
+                    node.left.value = node.value * 2 + 1
+                    new_nodes.append(node.left)
+
+                if node.right:
+                    node.right.value = node.value * 2 + 2
+                    new_nodes.append(node.right)
+            nodes = new_nodes
+
+        self.root = root
 
     def find(self, target: int) -> bool:
-        pass
+        nodes = [self.root]
+        while nodes:
+            new_nodes = []
+            for node in nodes:
+                if node.value == target:
+                    return True
+                if target < node.value:
+                    continue
+                if node.left:
+                    new_nodes.append(node.left)
+                if node.right:
+                    new_nodes.append(node.right)
 
+            nodes = new_nodes
+
+        return False
 
 # Your FindElements object will be instantiated and called as such:
 # obj = FindElements(root)
