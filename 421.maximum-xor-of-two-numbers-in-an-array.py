@@ -9,27 +9,16 @@ from typing import List
 # @lc code=start
 class Solution:
     def findMaximumXOR(self, nums: List[int]) -> int:
-        maximums = []
-        l = 0
-        for n in nums:
-            digits = len(f"{n:b}")
-            if digits == l:
-                maximums.append(n)
-            elif digits > l:
-                l = digits
-                maximums.clear()
-                maximums.append(n)
-
-        if len(maximums) != len(nums):
-            for maximum in maximums:
-                nums.remove(maximum)
-
         m = 0
-        for maximum in maximums:
-            for num in nums:
-                if num == maximum:
-                    continue
-                m = max(m, num ^ maximum)
+        mask = 0
+        for i in range(31, -1, -1):
+            mask = mask | (1 << i)
+            values = {num & mask for num in nums}
+            candidate_max = m | (1 << i)
+            for prefix in values:
+                if (candidate_max ^ prefix) in values:
+                    m = candidate_max
+                    break
 
         return m
 
