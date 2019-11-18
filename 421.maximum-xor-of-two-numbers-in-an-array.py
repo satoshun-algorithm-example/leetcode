@@ -20,6 +20,10 @@ class Solution:
                 maximums.clear()
                 maximums.append(n)
 
+        if len(maximums) != len(nums):
+            for maximum in maximums:
+                nums.remove(maximum)
+
         m = 0
         for maximum in maximums:
             for num in nums:
