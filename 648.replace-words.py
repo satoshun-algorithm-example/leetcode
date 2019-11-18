@@ -12,8 +12,13 @@ class Solution:
         sentences = sentence.split(" ")
 
         dict.sort()
+        alphabet_map = {}
+        for d in dict:
+            alphabet_map[d[0]] = alphabet_map.get(d[0], []) + [d]
+
         for i, s in enumerate(sentences):
-            for d in dict:
+            dd = alphabet_map.get(s[0], [])
+            for d in dd:
                 if s.startswith(d):
                     sentences[i] = d
                     break
