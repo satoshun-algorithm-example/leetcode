@@ -9,37 +9,21 @@ from typing import List
 # @lc code=start
 class Solution:
     def maxSumTwoNoOverlap(self, A: List[int], L: int, M: int) -> int:
-        if L < M:
-            L, M = M, L
+        for i in range(1, len(A)):
+            A[i] += A[i - 1]
 
-        a_group = []
-        for i in range(len(A) - L):
-            a_group.append(sum(A[i:i + L]))
+        res = A[L + M - 1]
+        l_max = A[L - 1]
+        m_max = A[M - 1]
+        for i in range(1, len(A) - L - M + 1):
+            l_max = max(l_max, A[L + i - 1] - A[i - 1])
+            m_max = max(m_max, A[M + i - 1] - A[i - 1])
+            res = max(
+                res,
+                l_max + A[L + M + i - 1] - A[L + i - 1],
+                m_max + A[L + M + i - 1] - A[M + i - 1],
+            )
 
-        b_group = []
-        for i in range(len(A) - M):
-            b_group.append(sum(A[i:i + M]))
-
-        # check max a_group -> second b_group
-        a_max = max(a_group)
-        a_indices = [i for i in range(len(a_group)) if a_group[i] == a_max]
-        b_max = 0
-        for index in a_indices:
-            start = max(0, index - M)
-            end = index + L + M
-            b_max = max(b_max, max(b_group[:start] + b_group[end:]))
-
-        res = a_max + b_max
-
-        # check max b_group -> second a_group
-        b_max = max(b_group)
-        b_indices = [i for i in range(len(b_group)) if b_group[i] == b_max]
-        a_max = 0
-        for index in b_indices:
-            start = max(0, index - L)
-            end = index + M + L
-            a_max = max(a_max, max(a_group[:start] + a_group[end:]))
-
-        return max(res, a_max + b_max)
+        return res
 
 # @lc code=end
