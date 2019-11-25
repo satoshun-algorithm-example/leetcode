@@ -24,18 +24,22 @@ class Solution:
             return edges[-1]
 
         def find_cycle(current, visited):
-            for edge in edges:
-                # find!!
-                if edge[0] == current and visited[0] == edge[1] and len(visited) != 1:
-                    return visited
-                if edge[1] == current and visited[0] == edge[0] and len(visited) != 1:
-                    return visited
+            if current in visited and current == visited[0]:
+                return visited
+            if current in visited:
+                return None
+            visited = visited[:] + [current]
 
+            for edge in edges:
                 # search
-                if edge[0] == current and edge[1] not in visited:
-                    find_cycle(edge[1], visited + [edge[0]])
-                if edge[1] == current and edge[0] not in visited:
-                    find_cycle(edge[0], visited + [edge[1]])
+                if edge[0] == current:
+                    result = find_cycle(edge[1], visited)
+                    if result:
+                        return result
+                if edge[1] == current:
+                    result = find_cycle(edge[0], visited)
+                    if result:
+                        return result
 
         def find_edge(visisted):
             last_edge = -1
@@ -50,12 +54,15 @@ class Solution:
         index = [key for key, value in indicies.items() if value == 3][0]
         for edge in edges:
             if edge[0] == index:
-                result = find_cycle(edge[1], [edge[0]])
+                result = find_cycle(edge[1], [index])
                 if result:
                     return find_edge(result)
             if edge[1] == index:
-                result = find_cycle(edge[0], [edge[1]])
+                result = find_cycle(edge[0], [index])
                 if result:
                     return find_edge(result)
+
+
+print(Solution().findRedundantConnection([[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]))
 
 # @lc code=end
