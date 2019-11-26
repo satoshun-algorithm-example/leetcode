@@ -9,25 +9,23 @@ from typing import List
 # @lc code=start
 class Solution:
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
-        result = [0] * len(nums)
+        result = [-1] * len(nums)
         for i, n in enumerate(nums):
-            greater = -1
+            greater = False
 
             # current -> end
             for j in range(i + 1, len(nums)):
                 if nums[i] < nums[j]:
-                    greater = nums[j]
+                    result[i] = nums[j]
+                    greater = True
                     break
-            if greater != -1:
-                result[i] = greater
+            if greater:
                 continue
 
             for j in range(i):
                 if nums[i] < nums[j]:
-                    greater = nums[j]
+                    result[i] = nums[j]
                     break
-
-            result[i] = greater
 
         return result
 # @lc code=end
