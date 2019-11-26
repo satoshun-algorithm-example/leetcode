@@ -19,14 +19,14 @@ class Solution:
             end -= 1
 
         while start < end:
-            diff_start = start * (nums[start + 1] - nums[start])
-            diff_end = (len(nums) - 1 - end) * (nums[end] - nums[end - 1])
+            diff_start = (start + 1) * (nums[start + 1] - nums[start])
+            diff_end = (len(nums) - end) * (nums[end] - nums[end - 1])
             if diff_start > diff_end:
-                nums[end] = nums[end - 1]
-                count += diff_end + 1
+                end -= 1
+                count += diff_end
             else:
-                nums[start] = nums[start + 1]
-                count += diff_start + 1
+                start += 1
+                count += diff_start
 
             while len(nums) > start + 1 and nums[start] == nums[start + 1]:
                 start += 1
