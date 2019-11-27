@@ -10,22 +10,15 @@ from typing import List
 class Solution:
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
         result = [-1] * len(nums)
-        for i, n in enumerate(nums):
-            greater = False
+        stack = []
+        for i in range(len(nums) * 2):
+            n = i % len(nums)
+            num = nums[n]
+            while len(stack) != 0 and nums[stack[-1]] < num:
+                result[stack.pop()] = num
 
-            # current -> end
-            for j in range(i + 1, len(nums)):
-                if nums[i] < nums[j]:
-                    result[i] = nums[j]
-                    greater = True
-                    break
-            if greater:
-                continue
-
-            for j in range(i):
-                if nums[i] < nums[j]:
-                    result[i] = nums[j]
-                    break
+            if i == n:
+                stack.append(i)
 
         return result
 # @lc code=end
