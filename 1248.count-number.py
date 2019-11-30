@@ -10,18 +10,13 @@ class Solution:
         nums = [n % 2 for n in nums]
 
         def count_up(k):
-            total = 0
-
-            start, c = 0, 0
-            n = 0
+            total, start = 0, 0
             for i in range(len(nums)):
-                c += nums[i]
-                n += 1
-                while c > k:
-                    c -= nums[start]
+                k -= nums[i]
+                while k < 0:
+                    k += nums[start]
                     start += 1
-                    n -= 1
-                total += n
+                total += i - start + 1
             return total
 
         return count_up(k) - count_up(k - 1)
