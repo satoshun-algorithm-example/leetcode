@@ -10,23 +10,15 @@ from typing import List
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
         matrix = [[0] * n for _ in range(n)]
-        advance = 0
-        current = 1
-        while current <= n ** 2:
-            for x in range(advance, n - advance):
-                matrix[advance][x] = current
-                current += 1
-            for y in range(advance + 1, n - advance):
-                matrix[y][n - advance - 1] = current
-                current += 1
-            for x in range(n - advance - 2, advance - 1, - 1):
-                matrix[n - advance - 1][x] = current
-                current += 1
-            for y in range(n - advance - 2, advance, -1):
-                matrix[y][advance] = current
-                current += 1
-            advance += 1
-
+        dx, dy = 1, 0
+        x, y = 0, 0
+        matrix[0][0] = 1
+        for i in range(1, n ** 2):
+            if n <= x + dx or n <= y + dy or (matrix[y+dy][x+dx]):
+                dx, dy = -dy, dx
+            x += dx
+            y += dy
+            matrix[y][x] = i + 1
         return matrix
 
 # @lc code=end
