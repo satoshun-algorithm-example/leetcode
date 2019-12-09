@@ -10,22 +10,13 @@ from typing import List
 class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
         pairs.sort(key=lambda a: a[1])
-        count = 1
-        next_value = pairs[0][1]
-        pairs = pairs[1::]
-        while True:
-            find = False
-            for i, pair in enumerate(pairs):
-                if next_value < pair[0]:
-                    next_value = pair[1]
-                    find = True
-                    count += 1
-                    pairs = pairs[i+1::]
-                    break
+        dp = [1 for _ in pairs]
+        for i in range(1, len(pairs)):
+            dp[i] = max(dp)
+            for j in range(i):
+                if pairs[j][1] < pairs[i][0]:
+                    dp[i] = max(dp[i], dp[j] + 1)
 
-            if not find:
-                break
-
-        return count
+        return dp[-1]
 
 # @lc code=end
