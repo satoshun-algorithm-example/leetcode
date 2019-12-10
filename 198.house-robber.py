@@ -3,12 +3,13 @@
 #
 # [198] House Robber
 #
+from typing import List
+
+
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        cur = prev = 0
+        dp = [0 for _ in nums] + [0, 0]
+        for i in range(2, len(nums) + 2):
+            dp[i] = max(dp[i - 2] + nums[i - 2], dp[i - 1])
 
-        for num in nums:
-            tmp = cur
-            cur = max(prev + num, cur)
-            prev = tmp
-        return cur
+        return dp[-1]
