@@ -10,11 +10,13 @@ from typing import List
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         find_nodes = []
+        result = None
         for edge in edges:
             if edge[0] in find_nodes and edge[1] in find_nodes:
-                return edge
+                result = edge
+                continue
             find_nodes.extend(edge)
 
-        raise
+        return result
 
 # @lc code=end
