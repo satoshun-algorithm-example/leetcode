@@ -19,14 +19,15 @@ class Solution:
         def union(x, y):
             root_x = find(x)
             root_y = find(y)
+
             if root_x == root_y:
-                return False
+                return True
 
             parent[root_x] = root_y
-            return True
+            return False
 
         for edge in edges:
-            if not union(edge[0] - 1, edge[1] - 1):
+            if union(edge[0] - 1, edge[1] - 1):
                 return edge
 
 # @lc code=end
