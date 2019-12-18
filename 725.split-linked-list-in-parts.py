@@ -15,24 +15,24 @@ from typing import List
 
 class Solution:
     def splitListToParts(self, root: ListNode, k: int) -> List[ListNode]:
-        # create separated list
-        node = root
-        parts = [[] for _ in range(k)]
-        i = 0
-        while node:
-            parts[i].append(node)
-            i = (i + 1) % k
-            node = node.next
+        curr, length = root, 0
 
-        # divide
-        res = [[] for _ in range(k)]
-        nums = [len(part) for part in parts]
-        n = 0
-        for i in range(k):
-            num = nums[i]
-            for _ in range(num):
-                res[i].append(parts[n].pop(0))
-                n = (n + 1) % k
+        while curr:
+            curr, length = curr.next, length + 1
+
+        # Determine the length of each chunk
+        chunk_size, longer_chunks = length // k, length % k
+        res = [chunk_size + 1] * longer_chunks + [chunk_size] * (k - longer_chunks)
+        print(res)
+
+        # Split up the list
+        prev, curr = None, root
+        for index, num in enumerate(res):
+            if prev:
+                prev.next = None
+            res[index] = curr
+            for i in range(num):
+                prev, curr = curr, curr.next
 
         return res
 
