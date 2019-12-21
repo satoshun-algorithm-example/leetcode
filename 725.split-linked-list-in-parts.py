@@ -23,7 +23,6 @@ class Solution:
         # Determine the length of each chunk
         chunk_size, longer_chunks = length // k, length % k
         res = [chunk_size + 1] * longer_chunks + [chunk_size] * (k - longer_chunks)
-        print(res)
 
         # Split up the list
         prev, curr = None, root
