@@ -7,13 +7,11 @@ class Solution:
             if len(set(target)) > maxLetters:
                 continue
 
-            i = end - minSize
+            i = end - 1
             while i - minSize >= 0:
                 if s[i - minSize: i] == target:
                     c += 1
-                    i -= minSize
-                else:
-                    i -= 1
+                i -= 1
 
             count = max(count, c)
 
