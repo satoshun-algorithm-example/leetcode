@@ -3,18 +3,15 @@ from typing import List
 
 class Solution:
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
-        if len(nums) % k != 0:
-            return False
+        d = {}
+        for num in nums:
+            d[num] = d.get(num, 0) + 1
 
-        nums.sort()
-
-        while nums:
-            start = nums.pop(0)
-            for i in range(k - 1):
-                try:
-                    index = nums.index(start + 1)
-                    start = nums.pop(index)
-                except:
-                    return False
+        for key in sorted(d.keys()):
+            while d[key]:
+                for k in range(key, key + k):
+                    if d.get(k, 0) == 0:
+                        return False
+                    d[k] -= 1
 
         return True
