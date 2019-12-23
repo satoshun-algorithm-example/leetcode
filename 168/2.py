@@ -9,9 +9,9 @@ class Solution:
 
         for key in sorted(d.keys()):
             while d[key]:
-                for k in range(key, key + k):
-                    if d.get(k, 0) == 0:
+                for i in range(key, key + k):
+                    if d.get(i, 0) == 0:
                         return False
-                    d[k] -= 1
+                    d[i] -= 1
 
         return True
