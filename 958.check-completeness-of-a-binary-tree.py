@@ -20,23 +20,25 @@ class Solution:
         nodes = [root]
         while nodes:
             new_nodes = []
+
             is_failed = False
+            is_left = False
             for node in nodes:
                 if not node.left and node.right:
-                    is_failed = True
-                    break
+                    return False
                 if not node.left and not node.right:
-                    if is_failed:
+                    if is_failed and is_left:
                         return False
                     is_failed = True
                     break
                 if node.left and not node.right:
-                    if is_failed:
+                    if is_failed and is_left:
                         return False
+                    is_left = True
                     is_failed = True
                     break
 
-                if is_failed:
+                if is_failed and is_left:
                     return False
 
                 new_nodes += [node.left, node.right]
