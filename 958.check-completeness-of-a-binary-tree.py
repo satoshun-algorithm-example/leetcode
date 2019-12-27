@@ -14,37 +14,13 @@
 
 class Solution:
     def isCompleteTree(self, root: TreeNode) -> bool:
-        if not root:
-            return True
-
         nodes = [root]
-        while nodes:
-            new_nodes = []
+        i = 0
+        while nodes[i]:
+            nodes.append(nodes[i].left)
+            nodes.append(nodes[i].right)
+            i += 1
 
-            is_failed = False
-            is_left = False
-            for node in nodes:
-                if not node.left and node.right:
-                    return False
-                if not node.left and not node.right:
-                    if is_failed and is_left:
-                        return False
-                    is_failed = True
-                    break
-                if node.left and not node.right:
-                    if is_failed and is_left:
-                        return False
-                    is_left = True
-                    is_failed = True
-                    break
-
-                if is_failed and is_left:
-                    return False
-
-                new_nodes += [node.left, node.right]
-
-            nodes = new_nodes
-
-        return True
+        return not any(nodes[i:])
 
 # @lc code=end
