@@ -11,15 +11,21 @@
 
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
-        if not head:
+        if not head or not head.next:
             return None
 
-        elements = [head]
-        slow = head
-        while slow:
-            slow = slow.next
-            if slow in elements:
-                return slow
-            elements.append(slow)
+        slow = head.next
+        fast = head.next.next
 
-        return None
+        while slow != fast:
+            if not fast or not fast.next or not fast.next.next:
+                return None
+            slow = slow.next
+            fast = fast.next.next
+
+        start = head
+        while start != fast:
+            start = start.next
+            fast = fast.next
+
+        return start
