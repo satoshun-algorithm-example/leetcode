@@ -10,11 +10,10 @@ import heapq
 # @lc code=start
 class Solution:
     def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
-        res = []
-        heap = []
-
         if not nums1 or not nums2:
-            return res
+            return []
+
+        res, heap = [], []
 
         for i in range(len(nums1)):
             for j in range(len(nums2)):
