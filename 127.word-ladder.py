@@ -11,6 +11,9 @@ class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         visited = []
 
+        if endWord not in wordList:
+            return 0
+
         def can_transform(word1, word2):
             n = 0
             for i in range(len(word1)):
