@@ -4,6 +4,7 @@
 # [127] Word Ladder
 #
 from typing import List
+import sys
 
 
 # @lc code=start
@@ -24,15 +25,17 @@ class Solution:
             if can_transform(current, endWord):
                 return index
 
+            result = sys.maxsize
             for word in wordList:
                 if word not in visited and can_transform(word, current):
                     visited.append(word)
-                    v = check(word, index + 1)
-                    if v:
-                        return v
+                    result = min(result, check(word, index + 1))
 
+            return result
+
+        result = check(beginWord, 2)
+        if result == sys.maxsize:
             return 0
-
-        return check(beginWord, 2)
+        return result
 
 # @lc code=end
