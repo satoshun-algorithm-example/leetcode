@@ -30,6 +30,7 @@ class Solution:
                 if word not in visited and can_transform(word, current):
                     visited.append(word)
                     result = min(result, check(word, index + 1))
+                    visited.remove(word)
 
             return result
 
