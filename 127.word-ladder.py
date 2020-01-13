@@ -4,39 +4,38 @@
 # [127] Word Ladder
 #
 from typing import List
-import sys
 
 
 # @lc code=start
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        visited = []
-
-        if endWord not in wordList:
-            return 0
+        depth = 1
+        queue = [beginWord]
 
         def can_transform(word1, word2):
             n = 0
             for i in range(len(word1)):
                 n += word1[i] != word2[i]
-            return n <= 1
 
-        def check(current, index):
-            if can_transform(current, endWord):
-                return index
+            return n == 1
 
-            result = sys.maxsize
-            for word in wordList:
-                if word not in visited and can_transform(word, current):
-                    visited.append(word)
-                    result = min(result, check(word, index + 1))
-                    visited.remove(word)
+        while queue:
+            for _ in range(len(queue)):
+                word = queue.pop()
+                if word == endWord:
+                    return depth + 1
 
-            return result
+                append = []
+                for w in wordList:
+                    if can_transform(w, word):
+                        queue.append(w)
+                        append.append(w)
 
-        result = check(beginWord, 2)
-        if result == sys.maxsize:
-            return 0
-        return result
+                for w in append:
+                    wordList.remove(w)
+
+            depth += 1
+
+        return 0
 
 # @lc code=end
