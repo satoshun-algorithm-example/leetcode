@@ -21,18 +21,16 @@ class Solution:
 
         while queue:
             for _ in range(len(queue)):
-                word = queue.pop()
+                word = queue.pop(0)
                 if word == endWord:
-                    return depth + 1
+                    return depth
 
-                append = []
+                if word in wordList:
+                    wordList.remove(word)
+
                 for w in wordList:
                     if can_transform(w, word):
                         queue.append(w)
-                        append.append(w)
-
-                for w in append:
-                    wordList.remove(w)
 
             depth += 1
 
