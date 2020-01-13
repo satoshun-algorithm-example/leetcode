@@ -9,9 +9,6 @@ from typing import List
 # @lc code=start
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        depth = 1
-        queue = [beginWord]
-
         wordList = set(wordList)
 
         def can_transform(word1, word2):
@@ -21,20 +18,23 @@ class Solution:
 
             return n == 1
 
+        queue = [beginWord]
+        depth = 1
+        visited = set()
+
         while queue:
             for _ in range(len(queue)):
                 word = queue.pop(0)
                 if word == endWord:
                     return depth
 
-                append = []
-                for w in wordList:
-                    if can_transform(w, word):
-                        queue.append(w)
-                        append.append(w)
-
-                for w in append:
-                    wordList.remove(w)
+                for i in range(len(word)):
+                    for c in range(26):
+                        c = chr(ord('a') + c)
+                        w = word[:i] + c + word[i + 1:]
+                        if w in wordList and w not in visited:
+                            visited.add(w)
+                            queue.append(w)
 
             depth += 1
 
