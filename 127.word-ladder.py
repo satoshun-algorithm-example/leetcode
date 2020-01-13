@@ -12,6 +12,8 @@ class Solution:
         depth = 1
         queue = [beginWord]
 
+        wordList = set(wordList)
+
         def can_transform(word1, word2):
             n = 0
             for i in range(len(word1)):
@@ -25,12 +27,14 @@ class Solution:
                 if word == endWord:
                     return depth
 
-                if word in wordList:
-                    wordList.remove(word)
-
+                append = []
                 for w in wordList:
                     if can_transform(w, word):
                         queue.append(w)
+                        append.append(w)
+
+                for w in append:
+                    wordList.remove(w)
 
             depth += 1
 
